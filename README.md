@@ -7,16 +7,20 @@
 	var argumentor = require("cli-argumentor");
 	var args = new argumentor(process.argv.slice());
 
+	// this.vars is a global variable holder for the argumentor object
 	args.init(function(vars) {
 		vars.someGlobalValue = true;
-	});
-
-	args.add(["--help", "-h"], function() {
+	})
+	.add(["--help", "-h"], function() {
 		console.log(showHelp);
+	})
+	.add(["--run"], function() {
+		this.vars.someGlobalValue = false;
+		// run something
 	});
 
-	args.add(["--run"], function() {
-		// run something
+	args.add(["--make"], function() {
+		// make something
 	});
 
 	args.exec(function(vars) {

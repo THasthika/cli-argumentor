@@ -24,6 +24,7 @@ module.exports = function(args) {
 
 	argumentor.init = function(cb) {
 		cb(this.vars);
+		return this;
 	};
 
 	argumentor.add = function(keywords, func) {
@@ -43,6 +44,8 @@ module.exports = function(args) {
 		for(var i = 0; i < keywords.length; i++) {
 			this.params[keywords[i]] = o;
 		}
+
+		return this;
 	};
 
 
