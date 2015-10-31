@@ -8,25 +8,17 @@ DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS 
 IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 **/
 
-
-
 module.exports = function(args) {
-
 	var args = args;
-
 	args.shift();
 	args.shift();
-	
 	var argumentor = {};
-	
 	argumentor.params = {};
 	argumentor.vars = {};
-
 	argumentor.init = function(cb) {
 		cb(this.vars);
 		return this;
 	};
-
 	argumentor.add = function(keywords, func) {
 
 		if(keywords == undefined || keywords == "" || keywords == [] || keywords.length == 0)
@@ -47,8 +39,6 @@ module.exports = function(args) {
 
 		return this;
 	};
-
-
 	argumentor.exec = function(cb) {
 		while(args.length > 0) {
 			var arg = args.shift();
@@ -57,18 +47,13 @@ module.exports = function(args) {
 					var o = this.params[k];
 					var params = [];
 					for(var i = 0; i < o.count; i++) {
-						params = args.shift();
+						params.push(args.shift());
 					}
 					o.func.apply(this, params);
 				}
 			}
 		}
-
 		cb(this.vars);
 	};
-
-
-
 	return argumentor;
-
 };
