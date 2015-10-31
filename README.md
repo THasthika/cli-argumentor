@@ -1,10 +1,10 @@
-#Argumentor
+#cli-argumentor
 
 ##A command-line argument handler
 
 - ##Usage:
 	``` javascript
-	var argumentor = require("argumentor");
+	var argumentor = require("cli-argumentor");
 	var args = new argumentor(process.argv.slice());
 
 	args.init(function(vars) {
