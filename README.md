@@ -8,8 +8,10 @@
 	var args = new argumentor(process.argv.slice());
 
 	// this.vars is a global variable holder for the argumentor object
-	args.init(function(vars) {
+	args.init(function(vars, args) {
 		vars.someGlobalValue = true;
+		if(args[0] == "./")
+			console.log("OK!");
 	})
 	.add(["--help", "-h"], function() {
 		console.log(showHelp);

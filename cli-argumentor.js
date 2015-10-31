@@ -16,7 +16,7 @@ module.exports = function(args) {
 	argumentor.params = {};
 	argumentor.vars = {};
 	argumentor.init = function(cb) {
-		cb(this.vars);
+		cb(this.vars, args);
 		return this;
 	};
 	argumentor.add = function(keywords, func) {
