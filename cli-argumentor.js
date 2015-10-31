@@ -15,11 +15,16 @@ module.exports = function(args) {
 	var argumentor = {};
 	argumentor.params = {};
 	argumentor.vars = {};
+	argumentor.def = function() {};
 	argumentor.init = function(cb) {
 		cb(this.vars, args);
 		return this;
 	};
 	argumentor.add = function(keywords, func) {
+
+		if(typeof keywords == "function") {
+			this.def = keywords;
+		}
 
 		if(keywords == undefined || keywords == "" || keywords == [] || keywords.length == 0)
 			throw new Error('Keywords must be a string or an array!');
@@ -41,9 +46,11 @@ module.exports = function(args) {
 	};
 	argumentor.exec = function(cb) {
 		while(args.length > 0) {
+			var found = false;
 			var arg = args.shift();
 			for(var k in this.params) {
 				if(k === arg) {
+					var found = true;
 					var o = this.params[k];
 					var params = [];
 					for(var i = 0; i < o.count; i++) {
@@ -52,6 +59,8 @@ module.exports = function(args) {
 					o.func.apply(this, params);
 				}
 			}
+			if(!found)
+				this.def(arg);
 		}
 		cb(this.vars);
 	};

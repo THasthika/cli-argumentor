@@ -25,6 +25,11 @@
 		// make something
 	});
 
+	// default argument handler when there is no keyword
+	args.add(function() {
+		// do something
+	});
+
 	args.exec(function(vars) {
 		console.log(vars.someGlobalValue);
 	});
